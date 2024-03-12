@@ -1,0 +1,3 @@
+services:
+  b3DailySync:
+    path: job

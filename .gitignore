@@ -1,0 +1,14 @@
+.node_modules
+.serverless
+.idea
+/job/.node_modules
+/job/.serverless
+/api/.node_modules
+/api/.serverless
+.serverless
+
+.DS_Store
+
+api/node_modules/
+
+node_modules/

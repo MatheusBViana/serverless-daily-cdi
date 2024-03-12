@@ -1,0 +1,13 @@
+version: '2.1'
+orbs:
+  common-ci: carteira-de-investimentos/common-ci@volatile
+workflows:
+  build:
+    jobs:
+      - common-ci/deploy-serveless:
+          context: common-context
+          filters:
+            branches:
+              only:
+                - develop
+                - main

@@ -1,0 +1,38 @@
+service: saveDailyCDI
+
+plugins:
+  - serverless-offline # used for local execution
+
+frameworkVersion: '3'
+
+package:
+  excludeDevDependencies: true
+  individually: true
+  
+provider:
+  name: aws
+  logRetentionInDays: 3
+  runtime: nodejs20.x
+  vpc:
+    securityGroupIds:
+      - ${cf:network-devops.SgForWebAppsOnMainVpc}
+    subnetIds:
+      - ${cf:network-devops.SubnetPrivate0}
+      - ${cf:network-devops.SubnetPrivate1}
+      - ${cf:network-devops.SubnetPrivate2}
+      - ${cf:network-devops.SubnetPrivate3}
+  environment:
+    ENV: DEV
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "sqs:SendMessage"
+      Resource: "arn:aws:sqs:us-east-1:669204338030:saveDailyCDIQueue_DEV"
+
+functions:
+  handler:
+    name: daily-cdi-update-dev
+    handler: handler.run
+    events:
+      - schedule: cron(0 7 ? * MON-FRI *) #every weekday at 04:00 - brazilian time
+    timeout: 900
