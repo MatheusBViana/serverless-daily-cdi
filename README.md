@@ -157,7 +157,7 @@ O projeto consiste em dois arquivos principais:
     </details>
 - client/external/DailyCDIClient.java
     - Esse arquivo é o responsável por fazer o GET na API, recebendo os parâmetros necessários e adicionando na URL da requisição.
-    <details> 
+      <details> 
       <summary>Código do arquivo:</summary>
       
       ```
